@@ -20,7 +20,7 @@ window.addEventListener('load', function load(){
 	}
 	circularNav += '</g>';
 	
-	circularNav += '<g id="inner">'
+	circularNav += '<g id="inner">';
 	for(let i = 0; i < 4; i++){
 		circularNav += '<a href="#">' + createWedge(4, i, 125, 0) + '</a>';
 	}
@@ -37,7 +37,7 @@ function createWedge(wedgeCount, wedgeNumber, outerRadius, innerRadius){
 	let x1 = 250 + (outerRadius * Math.cos(angle));
 	let y1 = 250 - (outerRadius * Math.sin(angle));
 	let rotation = (-360 / wedgeCount) * wedgeNumber;
-	let path;
+	let wedge;
 	if(innerRadius > 0) {
 		// location to start drawing wedge (first corner)
 		let x0 = outerRadius + innerRadius;
@@ -48,15 +48,31 @@ function createWedge(wedgeCount, wedgeNumber, outerRadius, innerRadius){
 		let x2 = outerRadius + (innerRadius) * Math.cos(angle);
 		let y2 = outerRadius - (innerRadius) * Math.sin(angle);
 		
-		path = '<path fill="lightgrey" stroke="white" stroke-width="5" d="M' + x0 + ',' + y0 + ' l' + xSide + ',0 A250,250 0 0,0 ' + x1 + ',' + y1 + ' L' + x2 + ',' + y2 + ' A150,150 0 0,1 ' + x0 + ',' + outerRadius +' z" transform="rotate(' + rotation + ',' + outerRadius + ',' + outerRadius +')" />';
+		wedge = '<path fill="lightgrey" stroke="white" stroke-width="5" d="M' + x0 + ',' + y0 + ' l' + xSide + ',0 A250,250 0 0,0 ' + x1 + ',' + y1 + ' L' + x2 + ',' + y2 + ' A150,150 0 0,1 ' + x0 + ',' + outerRadius +' z" transform="rotate(' + rotation + ',' + outerRadius + ',' + outerRadius +')" />';
 	} else {
-		path = '<path fill="grey" stroke="white" stroke-width="5" d="M250,250 l' + outerRadius + ',0 A' + outerRadius + ',' + outerRadius + ' 0 0,0 ' + x1 + ',' + y1 + ' z" transform="rotate(' + rotation + ', 250, 250)" />';
+		wedge = '<path fill="grey" stroke="white" stroke-width="5" d="M250,250 l' + outerRadius + ',0 A' + outerRadius + ',' + outerRadius + ' 0 0,0 ' + x1 + ',' + y1 + ' z" transform="rotate(' + rotation + ', 250, 250)" />';
+	}
+	
+	function tangentialText(message){
+		let textPath = '';
+		console.log(message);
+		return textPath;
+	}
+	
+	tangentialText();
+
+	/*function arcingText(message){
+		
 	}
 
-	return path;
+	function horizontalText(message){
+		
+	}*/
+
+	return wedge;
 }
 
-function rotate(degree){
+/*function rotate(degree){
 	'use strict';
 	
 	document.querySelector('#outer').setAttribute('transform', 'rotate(' + degree + ')');
@@ -85,4 +101,4 @@ document.querySelector('#inner').addEventListener('mousemove', function(){
 		deltaY = mouseY - event.clientY;
 		rotate(deltaX + deltaY);
 	}
-});
+});*/
